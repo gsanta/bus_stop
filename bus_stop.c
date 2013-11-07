@@ -19,7 +19,7 @@ void RenderScene(void)
   glRotatef(xRot, 1.0f, 0.0f, 0.0f);
   glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 	
-	/*glPushMatrix();
+	glPushMatrix();
 
 	glColor3f(255,0,0);
 	glTranslatef(0,0,-20);
@@ -35,7 +35,7 @@ void RenderScene(void)
 	glScalef(100,1,2);
   glutSolidCube(1);
 	
-	glPopMatrix();*/
+	glPopMatrix();
 
 	glPushMatrix();
 	
@@ -57,14 +57,14 @@ void RenderScene(void)
 	glPopMatrix();
 	
 	
-	/*glPushMatrix();
+	glPushMatrix();
 	
 	glColor4f(255,255,255,0.5);
 	glTranslatef(27,17.5,-21.5);
 	glScalef(1,35,15);
   glutSolidCube(1);
 
-	glPopMatrix();*/
+	glPopMatrix();
 
 	glPushMatrix();
 	
@@ -91,6 +91,25 @@ void RenderScene(void)
 	glScalef(2,8,1);
   glutSolidCube(1);
 
+	glPopMatrix();
+
+	//lábfejek
+	glPushMatrix();
+	
+	glColor3f(0,255,0);
+	glTranslatef(-20,1,-20);
+	glScalef(2,2,2);
+	glutSolidCube(1);
+	
+	glPopMatrix();
+
+	glPushMatrix();
+	
+	glColor3f(0,255,0);
+	glTranslatef(-15,1,-20);
+	glScalef(2,2,2);
+	glutSolidCube(1);
+	
 	glPopMatrix();
 	
 	//combok
@@ -125,7 +144,7 @@ void RenderScene(void)
 	glPushMatrix();
 	
 	glColor3f(0,255,0);
-	glTranslatef(-17.5,13,-28);
+	glTranslatef(-17.5,11,-28);
 	glScalef(7,10,3);
 	
   glutSolidCube(1);
@@ -136,7 +155,7 @@ void RenderScene(void)
 	glPushMatrix();
 	
 	glColor3f(0,255,0);
-	glTranslatef(-17.5,18,-28);
+	glTranslatef(-17.5,16,-28);
 	glScalef(2,1,2);
 	
   glutSolidCube(1);
@@ -147,10 +166,45 @@ void RenderScene(void)
 	glPushMatrix();
 	
 	glColor3f(0,255,0);
-	glTranslatef(-17.5,21,-28);
+	glTranslatef(-17.5,19,-28);
 	//glScalef(3,2,2);
 	
   glutSolidSphere(2.5,20,20);
+
+	glPopMatrix();
+
+
+	//bicikli kerekek
+	glPushMatrix();
+	
+	glColor3f(0,255,0);
+
+	glTranslatef(-25,5,-10);
+	glutSolidTorus(.5,5,8,8); 
+	
+	glTranslatef(-17,0,0);
+	glutSolidTorus(.5,5,8,8);
+
+	glPopMatrix();
+	
+
+	//kormányrúd
+	glPushMatrix();
+	
+	glTranslatef(-40,9,-10);
+	glRotatef(-30,0,0,1);
+	glScalef(1,10,1);
+	
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	glPushMatrix();
+
+	glTranslatef(-32,8,-10);
+	glRotatef(-22,0,0,1);
+	glScalef(16,1,1);
+	glutSolidCube(1);	
 
 	glPopMatrix();
 
