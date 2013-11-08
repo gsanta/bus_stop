@@ -36,7 +36,9 @@ void RenderScene(void)
   glutSolidCube(1);
 	
 	glPopMatrix();
-
+	
+	//buszmegálló	
+	//hátsó fal
 	glPushMatrix();
 	
 	glColor4f(255,255,255,0.5);
@@ -64,6 +66,15 @@ void RenderScene(void)
 	glScalef(1,35,15);
   glutSolidCube(1);
 
+	glPopMatrix();
+
+	//tető
+	glPushMatrix();
+	glColor3f(0,0,255);
+	glTranslatef(0,36,-22.5);
+	glScalef(57,2,22);
+	glutSolidCube(1);
+	
 	glPopMatrix();
 
 	glPushMatrix();
@@ -135,9 +146,9 @@ void RenderScene(void)
 
 	glPopMatrix();
 	
-	glPushMatrix();
+	//glPushMatrix();
 	
-	glRotatef(5,1,0,0);
+	//glRotatef(5,1,0,0);
 
 	//felsőtest
 
@@ -199,6 +210,8 @@ void RenderScene(void)
 
 	glPopMatrix();
 
+
+  //váz
 	glPushMatrix();
 
 	glTranslatef(-32,8,-10);
@@ -208,14 +221,139 @@ void RenderScene(void)
 
 	glPopMatrix();
 
+	//ülésrúd
+	glPushMatrix();
+	
+	glTranslatef(-33,9,-10);
+	glRotatef(-15,0,0,1);
+	glScalef(1,8,1);
+	glutSolidCube(1);	
+
+	glPopMatrix();
+
+	glPushMatrix();
+
+	glTranslatef(-32,13,-10);
+	glScalef(2,1,2);
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	//kormányrúd
+	glPushMatrix();
+	
+	glTranslatef(-37,13,-10);
+	glScalef(1,1,8);
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	
+
+	//lámpaoszlop
+	
+	glPushMatrix();
+
+	glTranslatef(35,22,-20);
+	
+	//rúd
+	glPushMatrix();
+		
+	glScalef(2,44,2);
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	//búra
+	glPushMatrix();
+	
+	glColor3f(255,0,0);
+	glTranslatef(0,22,2);	
+	glScalef(3,2,6);
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	glPopMatrix();
+
+	//busz
+
+	glPushMatrix();
+	glTranslatef(0,19.5,19.5);	
+
+	glPushMatrix();
+	
+	glColor3f(0,255,0);
+	
+	glScalef(96,35,35);
+	glutSolidCube(1);
+	
+	glPopMatrix();
+
+	//szélvédő
+	glPushMatrix();
+	
+	glColor3f(0,0,255);
+	glTranslatef(-48,6,0);
+	glScalef(1,18,33);
+	glutSolidCube(1);
+	
+	glPopMatrix();
+	
+	//bal oldali ablakok
+	glPushMatrix();
+	
+	glTranslatef(0,6,17.5);
+	glScalef(90,18,1);	
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	//hátsó ablak
+	glPushMatrix();
+
+	glTranslatef(48,6,0);
+	glScalef(1,18,33);
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	//jobb oldali ablakok
+	glPushMatrix();
+	
+	glTranslatef(0,6,-17.5);
+	glScalef(50,18,1);	
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	//első ajtó
+	glPushMatrix();
+	glColor3f(255,0,0);
+	glTranslatef(-39,0,-17.5);
+	glScalef(15,32,1);	
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	glPushMatrix();
+	//hátsó ajtó	
+	glPushMatrix();
+	glColor3f(255,0,0);
+	glTranslatef(39,0,-17.5);
+	glScalef(15,32,1);	
+	glutSolidCube(1);
+	
+	glPopMatrix();
+
+	glPopMatrix();
+
 	glPopMatrix();
   // >> Modellezo programresz
 
   // ...
 
   // << Modellezo programresz
-
-  glPopMatrix();
   
   // Flush drawing commands
   glutSwapBuffers();
