@@ -123,10 +123,10 @@ void RenderScene(void)
   glLightfv(GL_LIGHT0,GL_POSITION,spotPos);
 	glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION,spotDir);
 
-	
+	//járda	
 	glPushMatrix();
 
-	glColor3f(255,0,0);
+	glColor3f(0.4,0.4,0.4);
 	glTranslatef(0,0,-20);
 	glScalef(100,1,40);
   glutSolidCube(1);	
@@ -135,7 +135,7 @@ void RenderScene(void)
 
 	glPushMatrix();
 
-	glColor3f(255,255,255);
+	glColor3f(0.7,0.7,0.7);
 	glTranslatef(0,0,1);
 	glScalef(100,1,2);
   glutSolidCube(1);
@@ -151,9 +151,10 @@ void RenderScene(void)
 
 	glPopMatrix();
 
+	//lábszárak
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+	glColor3f(0.28,0.64,1);
 	glTranslatef(-20,5,-21);
 	glScalef(2,8,1);
   glutSolidCube(1);
@@ -162,7 +163,7 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+
 	glTranslatef(-15,5,-21);
 	glScalef(2,8,1);
   glutSolidCube(1);
@@ -172,7 +173,7 @@ void RenderScene(void)
 	//lábfejek
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+	glColor3f(0,0,0);
 	glTranslatef(-20,1,-20);
 	glScalef(2,2,2);
 	glutSolidCube(1);
@@ -181,7 +182,6 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
 	glTranslatef(-15,1,-20);
 	glScalef(2,2,2);
 	glutSolidCube(1);
@@ -191,7 +191,7 @@ void RenderScene(void)
 	//combok
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+	glColor3f(0.28,0.64,1);
 	glTranslatef(-20,8,-25);
 	glRotatef(-5, 1.0f, 0.0f, 0.0f);
 	glScalef(2,2,8);
@@ -202,7 +202,6 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
 	glTranslatef(-15,8,-25);
 	glRotatef(-5, 1.0f, 0.0f, 0.0f);
 	glScalef(2,2,8);
@@ -219,7 +218,7 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+	glColor3f(0,0.66,0.5);
 	glTranslatef(-17.5,11,-28);
 	glScalef(7,10,3);
 	
@@ -230,7 +229,7 @@ void RenderScene(void)
 	//nyak
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+	glColor3f(255,0.74,0.48);
 	glTranslatef(-17.5,16,-28);
 	glScalef(2,1,2);
 	
@@ -241,7 +240,7 @@ void RenderScene(void)
 	//fej
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+	glColor3f(255,0.74,0.48);
 	glTranslatef(-17.5,19,-28);
 	//glScalef(3,2,2);
 	
@@ -259,11 +258,11 @@ void RenderScene(void)
 	//bicikli kerekek
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
-
+	
+	glColor3f(0.9,0.9,0.9);
 	glTranslatef(-25,5,-10);
 	glRotatef(-bicycleXPos*3,0,0,1);
-	glColor3f(0,255,0);
+	
 	glutSolidTorus(.5,5,8,8); 
 	
 	glPopMatrix();
@@ -280,6 +279,7 @@ void RenderScene(void)
 	//kormányrúd
 	glPushMatrix();
 	
+	glColor3f(1,0,0);
 	glTranslatef(-40,9,-10);
 	glRotatef(-30,0,0,1);
 	glScalef(1,10,1);
@@ -355,6 +355,7 @@ void RenderScene(void)
 	//bal láb
 	glPushMatrix();
 
+	glColor3f(0.28,0.64,1);
 	glTranslatef(0,8,-8);
 	
 	if(bicycleXPos % 10 <= 5) {
@@ -374,6 +375,7 @@ void RenderScene(void)
 	//jobb láb
 	glPushMatrix();
 
+	glColor3f(0.28,0.64,1);
 	glTranslatef(0,8,-12);
 
 	if(bicycleXPos % 10 <= 5) {
@@ -393,6 +395,7 @@ void RenderScene(void)
 	//felső test
 	glPushMatrix();
 
+	glColor3f(0,0,1);
 	glTranslatef(1,18,-10);
 	glScalef(2,10,6);
 	glutSolidCube(1);
@@ -402,6 +405,7 @@ void RenderScene(void)
 	//nyak
 	glPushMatrix();
 
+	glColor3f(255,0.74,0.48);
 	glTranslatef(1,23,-10);
 	glScalef(2,1,3);
 	glutSolidCube(1);
@@ -411,6 +415,7 @@ void RenderScene(void)
 	//fej
 	glPushMatrix();
 	
+	glColor3f(255,0.74,0.48);
 	glTranslatef(1,26,-10);
 	glutSolidSphere(2.5,20,20);
 	
@@ -419,7 +424,7 @@ void RenderScene(void)
 	//bal kar
 	glPushMatrix();
 
-	glColor3f(255,0,0);
+	glColor3f(255,0.74,0.48);
 	glTranslatef(-1,18,-6);
 	glRotatef(-22,0,0,1);
 	glScalef(2,11,2);
@@ -430,7 +435,7 @@ void RenderScene(void)
 	//jobb kar
 	glPushMatrix();
 
-	glColor3f(255,0,0);
+	glColor3f(255,0.74,0.48);
 	glTranslatef(-1,18,-14);
 	glRotatef(-22,0,0,1);
 	glScalef(2,11,2);
@@ -450,7 +455,8 @@ void RenderScene(void)
 	
 	//rúd
 	glPushMatrix();
-		
+	
+	glColor3f(0.8,0.8,0.8);
 	glScalef(2,44,2);
 	glutSolidCube(1);
 
@@ -459,7 +465,7 @@ void RenderScene(void)
 	//búra
 	glPushMatrix();
 	
-	glColor3f(255,0,0);
+	glColor3f(0.5,0.5,0.5);
 	glTranslatef(0,22,2);	
 	glScalef(3,2,6);
 	glutSolidCube(1);
@@ -468,14 +474,14 @@ void RenderScene(void)
 
 	glPopMatrix();
 
-	/*//busz
+	//busz
 
 	glPushMatrix();
-	glTranslatef(100 - busXPos,19.5,19.5);	
+	glTranslatef(100 - busXPos,21,20.5);	
 
 	glPushMatrix();
 	
-	glColor3f(0,255,0);
+	glColor3f(1,0.85,0.24);
 	
 	glScalef(96,35,35);
 	glutSolidCube(1);
@@ -486,7 +492,7 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(255,0,0);
+	glColor3f(0.1,0.1,0.1);
 
 	glTranslatef(-43,-18.5,16.5);
 	glutSolidTorus(1.5,1.5,14,14); 
@@ -495,8 +501,6 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(255,0,0);
-
 	glTranslatef(-43,-18.5,-16.5);
 	glutSolidTorus(1.5,1.5,14,14); 
 
@@ -504,8 +508,6 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(255,0,0);
-
 	glTranslatef(43,-18.5,-16.5);
 	glutSolidTorus(1.5,1.5,14,14); 
 
@@ -513,8 +515,6 @@ void RenderScene(void)
 
 	glPushMatrix();
 	
-	glColor3f(255,0,0);
-
 	glTranslatef(43,-18.5,16.5);
 	glutSolidTorus(1.5,1.5,14,14); 
 
@@ -523,7 +523,7 @@ void RenderScene(void)
 	//szélvédő
 	glPushMatrix();
 	
-	glColor3f(0,0,255);
+	glColor3f(0.24,0.77,1);
 	glTranslatef(-48,6,0);
 	glScalef(1,18,33);
 	glutSolidCube(1);
@@ -559,7 +559,7 @@ void RenderScene(void)
 
 	//első ajtó
 	glPushMatrix();
-	glColor3f(255,0,0);
+	glColor3f(0.3,0.3,0.3);
 	glTranslatef(-39,0,-17.5);
 	glScalef(15,32,1);	
 	glutSolidCube(1);
@@ -569,7 +569,7 @@ void RenderScene(void)
 	glPushMatrix();
 	//hátsó ajtó	
 
-	glColor3f(255,0,0);
+	glColor3f(0.3,0.3,0.3);
 	glTranslatef(39,0,-17.5);
 	glScalef(15,32,1);	
 	glutSolidCube(1);
@@ -577,7 +577,7 @@ void RenderScene(void)
 	glPopMatrix();
 
 	glPopMatrix();
-*/
+
 	//labda
 	glPushMatrix();
 
@@ -631,7 +631,6 @@ void RenderScene(void)
 
 	//tető
 	glPushMatrix();
-	glColor3f(0,0,255);
 	glTranslatef(0,36,-22.5);
 	glScalef(57,2,22);
 	glutSolidCube(1);
@@ -644,10 +643,10 @@ void RenderScene(void)
 	glBindTexture( GL_TEXTURE_2D, texture2);
 	glColor3f(1,1,1);    
   glBegin(GL_QUADS);
-    glTexCoord2f(0.0, 0.0);  glVertex3f(-25.0, 5, -28);
-    glTexCoord2f(1.0, 0.0);  glVertex3f(25.0, 5.0, -28);
-    glTexCoord2f(1.0, 1.0);  glVertex3f(25.0, 35.0, -28);
-    glTexCoord2f(0.0, 1.0);  glVertex3f(-25.0, 35.0, -28);
+    glTexCoord2f(0.0, 0.0);  glVertex3f(-25.0, 5, -29);
+    glTexCoord2f(1.0, 0.0);  glVertex3f(25.0, 5.0, -29);
+    glTexCoord2f(1.0, 1.0);  glVertex3f(25.0, 35.0, -29);
+    glTexCoord2f(0.0, 1.0);  glVertex3f(-25.0, 35.0, -29);
   glEnd();
   glDisable(GL_TEXTURE_2D);
 
@@ -679,7 +678,7 @@ void SetupRC()
 
  	glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
 
-	glEnable(GL_LIGHTING);
+	/*glEnable(GL_LIGHTING);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
 
 	// Setup and enable light 0
@@ -706,7 +705,7 @@ void SetupRC()
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
 	glMateriali(GL_FRONT, GL_SHININESS, 128);
 
-	glEnable(GL_NORMALIZE);
+	glEnable(GL_NORMALIZE);*/
 }
 
 void SpecialKeys(int key, int x, int y)
