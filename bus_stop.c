@@ -11,6 +11,10 @@
 GLfloat xRot = 0.0f;
 GLfloat yRot = 0.0f;
 
+GLfloat ballXPos = 0;
+GLfloat busXPos = 0;
+int bicycleXPos = 0;
+
 GLuint texture1;
 
 // Called to draw scene
@@ -189,15 +193,28 @@ void RenderScene(void)
 	glPopMatrix();
 
 
+	//bicikli
+
+	glPushMatrix();
+
+	glTranslatef(bicycleXPos,0,3);	
+
 	//bicikli kerekek
 	glPushMatrix();
 	
 	glColor3f(0,255,0);
 
 	glTranslatef(-25,5,-10);
+	glRotatef(-bicycleXPos*3,0,0,1);
+	glColor3f(0,255,0);
 	glutSolidTorus(.5,5,8,8); 
 	
-	glTranslatef(-17,0,0);
+	glPopMatrix();
+
+	glPushMatrix();
+
+	glTranslatef(-42,5,-10);
+	glRotatef(-bicycleXPos*3,0,0,1);
 	glutSolidTorus(.5,5,8,8);
 
 	glPopMatrix();
@@ -282,18 +299,38 @@ void RenderScene(void)
 	glPushMatrix();
 
 	glTranslatef(0,8,-8);
-	glRotatef(-15,0,0,1);
-	glScalef(2,12,2);
+	
+	if(bicycleXPos % 10 <= 5) {
+		glRotatef(-15,0,0,1);
+		glTranslatef(0,2,0);
+		glScalef(2,10,2);
+
+	} else {
+		glRotatef(-15,0,0,1);
+		glScalef(2,12,2);
+	}
+	
 	glutSolidCube(1);
+
 	glPopMatrix();
 
 	//jobb láb
 	glPushMatrix();
 
 	glTranslatef(0,8,-12);
-	glRotatef(-15,0,0,1);
-	glScalef(2,12,2);
+
+	if(bicycleXPos % 10 <= 5) {
+		glRotatef(-15,0,0,1);
+		glTranslatef(0,2,0);
+		glScalef(2,10,2);
+
+	} else {
+		glRotatef(-15,0,0,1);
+		glScalef(2,12,2);
+	}
+
 	glutSolidCube(1);
+
 	glPopMatrix();
 
 	//felső test
@@ -346,6 +383,8 @@ void RenderScene(void)
 
 	glPopMatrix();
 
+	glPopMatrix();
+
 	//lámpaoszlop
 	
 	glPushMatrix();
@@ -374,8 +413,8 @@ void RenderScene(void)
 
 	//busz
 
-	/*glPushMatrix();
-	glTranslatef(0,19.5,19.5);	
+	glPushMatrix();
+	glTranslatef(100 - busXPos,19.5,19.5);	
 
 	glPushMatrix();
 	
@@ -384,6 +423,44 @@ void RenderScene(void)
 	glScalef(96,35,35);
 	glutSolidCube(1);
 	
+	glPopMatrix();
+
+	//kerekek
+
+	glPushMatrix();
+	
+	glColor3f(255,0,0);
+
+	glTranslatef(-43,-18.5,16.5);
+	glutSolidTorus(1.5,1.5,14,14); 
+
+	glPopMatrix();
+
+	glPushMatrix();
+	
+	glColor3f(255,0,0);
+
+	glTranslatef(-43,-18.5,-16.5);
+	glutSolidTorus(1.5,1.5,14,14); 
+
+	glPopMatrix();
+
+	glPushMatrix();
+	
+	glColor3f(255,0,0);
+
+	glTranslatef(43,-18.5,-16.5);
+	glutSolidTorus(1.5,1.5,14,14); 
+
+	glPopMatrix();
+
+	glPushMatrix();
+	
+	glColor3f(255,0,0);
+
+	glTranslatef(43,-18.5,16.5);
+	glutSolidTorus(1.5,1.5,14,14); 
+
 	glPopMatrix();
 
 	//szélvédő
@@ -434,7 +511,7 @@ void RenderScene(void)
 
 	glPushMatrix();
 	//hátsó ajtó	
-	glPushMatrix();
+
 	glColor3f(255,0,0);
 	glTranslatef(39,0,-17.5);
 	glScalef(15,32,1);	
@@ -442,15 +519,23 @@ void RenderScene(void)
 	
 	glPopMatrix();
 
-	glPopMatrix();*/
+	glPopMatrix();
 
 	//labda
 	glPushMatrix();
 
-	glColor3f(0,0,255);
-	glBindTexture(GL_TEXTURE_2D, texture1);
-	glTranslatef(40,3,-35);
+	glColor3f(255,255,255);
+	glEnable( GL_TEXTURE_2D );
+	glBindTexture( GL_TEXTURE_2D, texture1);
+
+	glEnable(GL_TEXTURE_GEN_S);
+	glEnable(GL_TEXTURE_GEN_T);
+	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+	glTranslatef(50-ballXPos,3,-35);
 	glutSolidSphere(2.5,20,20);
+
+	glDisable(GL_TEXTURE_2D);
 
 	glPopMatrix();
 
@@ -496,6 +581,14 @@ void SpecialKeys(int key, int x, int y)
   
   if(key == GLUT_KEY_RIGHT)
     yRot += 5.0f;
+
+	if(key == GLUT_KEY_F3) {
+		bicycleXPos -= 1;
+	}
+
+	if(key == GLUT_KEY_F4) {
+		bicycleXPos += 1;
+	}
   
   if(xRot > 356.0f)
     xRot = 0.0f;
@@ -547,8 +640,23 @@ void Timer(int value)
 {
   printf("Timer esemeny (%d)\n", value);
 
-  glutPostRedisplay();
-  glutTimerFunc(1000, Timer, value + 1);
+  ballXPos += 1;
+
+  if(ballXPos <= 70) {
+  	glutPostRedisplay();
+  	glutTimerFunc(100 + ballXPos, Timer, value + 1);
+
+  }
+}
+
+void Timer2(int value) {
+
+	//busXPos += 1;
+
+	if(busXPos <= 100) {
+  	//	glutPostRedisplay();
+  	//	glutTimerFunc(100, Timer2, value + 1);
+  	}
 }
 
 void Idle()
@@ -635,6 +743,8 @@ int main(int argc, char* argv[])
   glutSpecialFunc(SpecialKeys);
   glutKeyboardFunc(Keyboard);
   glutDisplayFunc(RenderScene);
+  glutTimerFunc(100, Timer, 1);
+  glutTimerFunc(1000, Timer2, 1);
   //glutTimerFunc(1000, Timer, 1); // 1 mp mulva meghivodik a Timer() fuggveny
   //glutIdleFunc(Idle); // Idle(), ha nem tortenik semmi
   
