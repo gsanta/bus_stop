@@ -2,11 +2,21 @@
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "texture.h"
 
 // Define a constant for the value of PI
 #define GL_PI 3.1415f
+
+
+static GLfloat  ambientLight[] = { 0.2f, 0.2f, 0.8f, 0.1f };
+static GLfloat  diffuseLight[] = { 0.2f, 0.2f, 0.8f, 0.5f };
+static GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
+static GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
+static GLfloat  lightpos[] = { -40.0f, 70.0f, 0.0f, -1.0f };
+static GLfloat spotDir[] = { 0.0f, 0.0f, -1.0f };
+static GLfloat spotPos[] = { 0,0,0 };
 
 GLfloat xRot = 0.0f;
 GLfloat yRot = 0.0f;
@@ -14,18 +24,105 @@ GLfloat yRot = 0.0f;
 GLfloat ballXPos = 0;
 GLfloat busXPos = 0;
 int bicycleXPos = 0;
+int text = 1;
 
 GLuint texture1;
+GLubyte *texture2;
+
+
+void StrokeText( char *string )
+{
+  int len, i;
+  len = (int) strlen ( string );
+  for ( i = 0; i < len; i++ ){
+    glutStrokeCharacter ( GLUT_STROKE_ROMAN, string[i] );
+  }
+}
+
+
+void BitmapText( GLfloat x, GLfloat y, char *string )
+{
+  int len, i;
+  glRasterPos2f( x, y );
+  len = (int) strlen ( string );
+  for ( i = 0; i < len; i++ ){
+    glutBitmapCharacter ( GLUT_BITMAP_HELVETICA_18, string[i] );
+  }
+}
 
 // Called to draw scene
 void RenderScene(void)
 {
+	
   // Clear the window with current clearing color
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  if(text) {
+	  //bal felirat
+
+	  glPushMatrix();
+	  glColor3f( 1.0, 1.0, 0.0 );
+	  glTranslatef( -48.0, 47.0, 0.0 );
+	  glScalef(0.02,0.02,0.02);
+	  StrokeText("Santa Gergely");
+	  glPopMatrix();
+
+	  glPushMatrix();
+	  glColor3f( 1.0, 1.0, 0.0 );
+	  glTranslatef( -48.0, 44.0, 0.0 );
+	  glScalef(0.02,0.02,0.02);
+	  StrokeText("sagtabt.sze");
+	  glPopMatrix();
+
+	  glPushMatrix();
+	  glColor3f( 1.0, 1.0, 0.0 );
+	  glTranslatef( -48.0, 41.0, 0.0 );
+	  glScalef(0.02,0.02,0.02);
+	  StrokeText("h171917");
+	  glPopMatrix();
+
+	  glPushMatrix();
+	  glColor3f( 1.0, 1.0, 0.0 );
+	  glTranslatef( -48.0, 38.0, 0.0 );
+	  glScalef(0.02,0.02,0.02);
+	  StrokeText("gazdasaginformatikus, III");
+	  glPopMatrix();
+
+	  //jobb felirat
+	  glPushMatrix();
+	  glColor3f( 1.0, 1.0, 0.0 );
+	  glTranslatef( 5.0, 47.0, 0.0 );
+	  glScalef(0.02,0.02,0.02);
+	  StrokeText("F1: felirat kapcsolasa");
+	  glPopMatrix();
+
+	  glPushMatrix();
+	  glColor3f( 1.0, 1.0, 0.0 );
+	  glTranslatef( 5.0, 44.0, 0.0 );
+	  glScalef(0.02,0.02,0.02);
+	  StrokeText("Nyilak: forgatas");
+	  glPopMatrix();
+
+	  glPushMatrix();
+	  glColor3f( 1.0, 1.0, 0.0 );
+	  glTranslatef( 5.0, 41.0, 0.0 );
+	  glScalef(0.02,0.02,0.02);
+	  StrokeText("F3, F4: bicili bal, jobb mozgasa");
+	  glPopMatrix();
+	}
 
   glPushMatrix();
   glRotatef(xRot, 1.0f, 0.0f, 0.0f);
   glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+
+  /*glPushMatrix();
+  glTranslatef(20,20,10);
+  glutSolidCube(2);
+  glPopMatrix();*/
+
+  glLightfv(GL_LIGHT0,GL_POSITION,spotPos);
+	glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION,spotDir);
+
 	
 	glPushMatrix();
 
@@ -42,46 +139,6 @@ void RenderScene(void)
 	glTranslatef(0,0,1);
 	glScalef(100,1,2);
   glutSolidCube(1);
-	
-	glPopMatrix();
-	
-	//buszmegálló	
-	//hátsó fal
-	glPushMatrix();
-	
-	glColor4f(255,255,255,0.5);
-	glTranslatef(0,17.5,-30);
-	glScalef(50,35,1);
-  glutSolidCube(1);
-
-	glPopMatrix();
-
-	//oldalfalak
-	glPushMatrix();
-	
-	glColor4f(255,255,255,0.5);
-	glTranslatef(-27,17.5,-21.5);
-	glScalef(1,35,15);
-  glutSolidCube(1);
-
-	glPopMatrix();
-	
-	
-	glPushMatrix();
-	
-	glColor4f(255,255,255,0.5);
-	glTranslatef(27,17.5,-21.5);
-	glScalef(1,35,15);
-  glutSolidCube(1);
-
-	glPopMatrix();
-
-	//tető
-	glPushMatrix();
-	glColor3f(0,0,255);
-	glTranslatef(0,36,-22.5);
-	glScalef(57,2,22);
-	glutSolidCube(1);
 	
 	glPopMatrix();
 
@@ -411,7 +468,7 @@ void RenderScene(void)
 
 	glPopMatrix();
 
-	//busz
+	/*//busz
 
 	glPushMatrix();
 	glTranslatef(100 - busXPos,19.5,19.5);	
@@ -520,7 +577,7 @@ void RenderScene(void)
 	glPopMatrix();
 
 	glPopMatrix();
-
+*/
 	//labda
 	glPushMatrix();
 
@@ -535,9 +592,64 @@ void RenderScene(void)
 	glTranslatef(50-ballXPos,3,-35);
 	glutSolidSphere(2.5,20,20);
 
+	glDisable(GL_TEXTURE_GEN_S);
+	glDisable(GL_TEXTURE_GEN_T);
 	glDisable(GL_TEXTURE_2D);
 
 	glPopMatrix();
+
+	//buszmegálló	
+	//hátsó fal
+	glPushMatrix();
+	
+	glColor4f(255,255,255,0.5);
+	glTranslatef(0,17.5,-30);
+	glScalef(50,35,1);
+  glutSolidCube(1);
+
+	glPopMatrix();
+
+	//oldalfalak
+	glPushMatrix();
+	
+	glColor4f(255,255,255,0.5);
+	glTranslatef(-27,17.5,-21.5);
+	glScalef(1,35,15);
+  glutSolidCube(1);
+
+	glPopMatrix();
+	
+	
+	glPushMatrix();
+	
+	glColor4f(255,255,255,0.5);
+	glTranslatef(27,17.5,-21.5);
+	glScalef(1,35,15);
+  glutSolidCube(1);
+
+	glPopMatrix();
+
+	//tető
+	glPushMatrix();
+	glColor3f(0,0,255);
+	glTranslatef(0,36,-22.5);
+	glScalef(57,2,22);
+	glutSolidCube(1);
+	
+	glPopMatrix();
+
+
+    //	FRONT
+	glEnable( GL_TEXTURE_2D );
+	glBindTexture( GL_TEXTURE_2D, texture2);
+	glColor3f(1,1,1);    
+  glBegin(GL_QUADS);
+    glTexCoord2f(0.0, 0.0);  glVertex3f(-25.0, 5, -28);
+    glTexCoord2f(1.0, 0.0);  glVertex3f(25.0, 5.0, -28);
+    glTexCoord2f(1.0, 1.0);  glVertex3f(25.0, 35.0, -28);
+    glTexCoord2f(0.0, 1.0);  glVertex3f(-25.0, 35.0, -28);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
 
 	glPopMatrix();
   // >> Modellezo programresz
@@ -554,6 +666,7 @@ void RenderScene(void)
 // context. 
 void SetupRC()
 {
+
   // Black background
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
   glEnable(GL_DEPTH_TEST);	
@@ -562,7 +675,38 @@ void SetupRC()
   glBlendFunc (GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
 	texture1 = TextureLoad("football.bmp", GL_FALSE, GL_LINEAR, GL_LINEAR, GL_REPEAT);
-  glEnable(GL_TEXTURE_2D);
+	texture2 = TextureLoad("adv.bmp", GL_FALSE, GL_LINEAR, GL_LINEAR, GL_REPEAT);
+
+ 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+
+	glEnable(GL_LIGHTING);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+
+	// Setup and enable light 0
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+	//glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+
+	// Specific spot effects
+	// Cut off angle
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 60.0f);
+
+	// Fairly shiny spot
+	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 100.0f);	
+
+	glEnable(GL_LIGHT0);
+
+	// Enable Material color tracking
+	glEnable(GL_COLOR_MATERIAL);
+	// Front material ambient and diffuse colors track glColor
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+	// All materials hereafter have full specular reflectivity
+	// with a high shine
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+	glMateriali(GL_FRONT, GL_SHININESS, 128);
+
+	glEnable(GL_NORMALIZE);
 }
 
 void SpecialKeys(int key, int x, int y)
@@ -581,6 +725,14 @@ void SpecialKeys(int key, int x, int y)
   
   if(key == GLUT_KEY_RIGHT)
     yRot += 5.0f;
+
+  if(key == GLUT_KEY_F1) {
+  	if(text == 1) {
+  		text = 0;
+  	} else {
+  		text = 1;
+  	}
+  }
 
 	if(key == GLUT_KEY_F3) {
 		bicycleXPos -= 1;
@@ -651,11 +803,11 @@ void Timer(int value)
 
 void Timer2(int value) {
 
-	//busXPos += 1;
+	busXPos += 1;
 
 	if(busXPos <= 100) {
-  	//	glutPostRedisplay();
-  	//	glutTimerFunc(100, Timer2, value + 1);
+  		glutPostRedisplay();
+  		glutTimerFunc(100, Timer2, value + 1);
   	}
 }
 
@@ -723,6 +875,23 @@ void ChangeSizePerspective(GLsizei w, GLsizei h)
   glLoadIdentity();
 }
 
+void ProcessMenu(int value)
+{
+  switch( value )
+    {
+    case 1:
+      	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+      break;
+      
+    case 2:
+      	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+      break;
+    }
+  
+  glutPostRedisplay();
+}
+
+
 int main(int argc, char* argv[])
 {
   // >> Inicializalas
@@ -747,6 +916,11 @@ int main(int argc, char* argv[])
   glutTimerFunc(1000, Timer2, 1);
   //glutTimerFunc(1000, Timer, 1); // 1 mp mulva meghivodik a Timer() fuggveny
   //glutIdleFunc(Idle); // Idle(), ha nem tortenik semmi
+
+  glutCreateMenu( ProcessMenu );
+  glutAddMenuEntry( "Drotvazas", 1 );
+  glutAddMenuEntry( "Kitoltott", 2 );
+  glutAttachMenu( GLUT_RIGHT_BUTTON );
   
   // << Callback fuggvenyek
 
