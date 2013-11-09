@@ -3,11 +3,15 @@
 #include <math.h>
 #include <stdio.h>
 
+#include "texture.h"
+
 // Define a constant for the value of PI
 #define GL_PI 3.1415f
 
 GLfloat xRot = 0.0f;
 GLfloat yRot = 0.0f;
+
+GLuint texture1;
 
 // Called to draw scene
 void RenderScene(void)
@@ -248,7 +252,99 @@ void RenderScene(void)
 
 	glPopMatrix();
 
+	//bal pedál
+	glPushMatrix();
+	glColor3f(255,0,0);
+	glTranslatef(-34,4,-9);
+	glScalef(1,4,1);
+	glutSolidCube(1);	
+
+	glPopMatrix();
+
+	//jobb pedál
+	glPushMatrix();
+
+	glColor3f(255,0,0);
+	glTranslatef(-34,4,-11);
+	glScalef(1,4,1);
+	glutSolidCube(1);	
+
+	glPopMatrix();
+
+	//biciklis ember
+
+	glPushMatrix();
+
+	glColor3f(0,0,255);
+	glTranslatef(-34,0,0);
+
+	//bal láb
+	glPushMatrix();
+
+	glTranslatef(0,8,-8);
+	glRotatef(-15,0,0,1);
+	glScalef(2,12,2);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	//jobb láb
+	glPushMatrix();
+
+	glTranslatef(0,8,-12);
+	glRotatef(-15,0,0,1);
+	glScalef(2,12,2);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	//felső test
+	glPushMatrix();
+
+	glTranslatef(1,18,-10);
+	glScalef(2,10,6);
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	//nyak
+	glPushMatrix();
+
+	glTranslatef(1,23,-10);
+	glScalef(2,1,3);
+	glutSolidCube(1);
+
+	glPopMatrix();
+
+	//fej
+	glPushMatrix();
 	
+	glTranslatef(1,26,-10);
+	glutSolidSphere(2.5,20,20);
+	
+	glPopMatrix();
+
+	//bal kar
+	glPushMatrix();
+
+	glColor3f(255,0,0);
+	glTranslatef(-1,18,-6);
+	glRotatef(-22,0,0,1);
+	glScalef(2,11,2);
+	glutSolidCube(1);	
+
+	glPopMatrix();
+
+	//jobb kar
+	glPushMatrix();
+
+	glColor3f(255,0,0);
+	glTranslatef(-1,18,-14);
+	glRotatef(-22,0,0,1);
+	glScalef(2,11,2);
+	glutSolidCube(1);	
+
+	glPopMatrix();
+
+	glPopMatrix();
 
 	//lámpaoszlop
 	
@@ -278,7 +374,7 @@ void RenderScene(void)
 
 	//busz
 
-	glPushMatrix();
+	/*glPushMatrix();
 	glTranslatef(0,19.5,19.5);	
 
 	glPushMatrix();
@@ -346,6 +442,16 @@ void RenderScene(void)
 	
 	glPopMatrix();
 
+	glPopMatrix();*/
+
+	//labda
+	glPushMatrix();
+
+	glColor3f(0,0,255);
+	glBindTexture(GL_TEXTURE_2D, texture1);
+	glTranslatef(40,3,-35);
+	glutSolidSphere(2.5,20,20);
+
 	glPopMatrix();
 
 	glPopMatrix();
@@ -369,6 +475,9 @@ void SetupRC()
 	
   glEnable (GL_BLEND);
   glBlendFunc (GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+	texture1 = TextureLoad("football.bmp", GL_FALSE, GL_LINEAR, GL_LINEAR, GL_REPEAT);
+  glEnable(GL_TEXTURE_2D);
 }
 
 void SpecialKeys(int key, int x, int y)
